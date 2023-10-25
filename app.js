@@ -1,8 +1,8 @@
 const player = document.getElementById("player");
 
 
-let playerX = 375;
-let playerY = 500;
+let playerX = 300;
+let playerY = 450;
 player.style.left = playerX + "px";
 player.style.top = playerY + "px";
 
