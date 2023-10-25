@@ -4,17 +4,17 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #000;
+    background-color: #f7f3f3;
   }
   #game-container {
     position: relative;
     width: 800px;
     height: 600px;
-    background-color: #000;
+    background-color: #fffafa;
   }
-  .player {
+  #player {
     position: absolute;
-    width: 10px;
-    height: 10px;
-    background-color: red;
+    width: 70px;
+    height: 70px;
+    bottom: 0;
   }

@@ -7,7 +7,7 @@ player.style.left = playerX + "px";
 player.style.top = playerY + "px";
 
 
-window.addEventListener("keydown", (event) => {
+document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowLeft") {
     playerX -= 10;
   } else if (event.key === "ArrowRight") {
