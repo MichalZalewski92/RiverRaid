@@ -1,18 +1,21 @@
 const player = document.querySelector(".player");
+const opponent = document.querySelector(".opponent");
 const gameContainer = document.querySelector(".game-container");
 console.log(gameContainer)
 console.log(player)
+console.log(opponent)
 
 
-// let playerX = 300;
-// let playerY = 450;
-// let playerZ = 100;
-let playerPosition = player.getAttribute("width");
-console.log(playerPosition);
-let gameContainerWidth = gameContainer.getAttribute("width");
+let playerX = player.offsetWidth
+let playerY = player.offsetHeight
+console.log(playerX)
+let playerZ = 100;
+// let playerPosition = player.getAttribute("width");
+// console.log(playerPosition);
+let gameContainerWidth = gameContainer.offsetWidth
 console.log(gameContainerWidth);
-// player.style.left = playerX + "px";
-// player.style.top = playerY + "px";
+player.style.left = playerX + "px";
+player.style.top = playerY + "px";
 
 
 
@@ -21,7 +24,7 @@ console.log(gameContainerWidth);
 document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowLeft" && playerX > -60) {
     playerX -= 10;
-  } else if (event.key === "ArrowRight" && playerX + playerPosition < gameContainerWidth) {
+  } else if (event.key === "ArrowRight" && playerX + playerY < gameContainerWidth) {
     playerX += 10;
   } else if (event.key === "ArrowUp"){
     playerZ += 10;
@@ -29,5 +32,5 @@ document.addEventListener("keydown", (event) => {
     playerZ -= 10;
   }
 
-//   player.style.left = playerX + "px";
+  player.style.left = playerX + "px";
 });

@@ -24,18 +24,24 @@ body {
     }
   }
   .player {
-    position: absolute;
-    height: 50;
-    width: 250;
-    bottom: 0;
-
-
-
+    position: absolute; 
+    height: 100px;
+    width: 150px;
+    top: 50px;
+    
+  }
+  .opponent {
+    position: absolute; 
+    height: 100px;
+    width: 100px;
+    top: 10px;
+    
   }
   #player{
-    position: relative;
-    width: 150px;
-    height: 150px;
+    position: absolute;
+    top: 400px;
+    width: 100px;
+    height: 100px;
   }
   #opponent {
     position: absolute;
