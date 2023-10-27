@@ -6,17 +6,36 @@ body {
     margin: 0;
     background-color: #f7f3f3;
   }
-  #game-container {
+  .game-container {
     position: relative;
-    width: 800px;
+    width: 480px;
     height: 600px;
-    background-color: #fffafa;
+    background: url(background.png);
+    animation: scroll-background 5s linear infinite;
+    
   }
-  #player {
+
+  @keyframes scroll-background{
+    from{
+        background-position: 0px 0px ;
+    }
+    to{
+        background-position: 0px 600px ;
+    }
+  }
+  .player {
     position: absolute;
-    width: 70px;
-    height: 70px;
+    height: 50;
+    width: 250;
     bottom: 0;
+
+
+
+  }
+  #player{
+    position: relative;
+    width: 150px;
+    height: 150px;
   }
   #opponent {
     position: absolute;
@@ -29,4 +48,13 @@ body {
     width: 5px;
     height: 10px;
     background-color: blue;
+  }
+  h2{
+    margin-left: 40%;
+    font-size: medium;
+    color: rgb(17, 17, 17);
+  }
+  .header{
+    background-color: #f7f3f3;
+    
   }

@@ -1,42 +1,33 @@
-const player = document.getElementById("player");
-const gameContainer = document.getElementById("game-container");
+const player = document.querySelector(".player");
+const gameContainer = document.querySelector(".game-container");
+console.log(gameContainer)
+console.log(player)
 
 
-let playerX = 375;
-let playerY = 500;
-let isShooting = false;
-player.style.left = playerX + "px";
-player.style.top = playerY + "px";
+// let playerX = 300;
+// let playerY = 450;
+// let playerZ = 100;
+let playerPosition = player.getAttribute("width");
+console.log(playerPosition);
+let gameContainerWidth = gameContainer.getAttribute("width");
+console.log(gameContainerWidth);
+// player.style.left = playerX + "px";
+// player.style.top = playerY + "px";
 
 
 
-function shoot() {
-    if (!isShooting) {
-      isShooting = true;
-      const bullet = document.createElement("div");
-      bullet.className = "bullet";
-      bullet.style.left = playerX + playerWidth / 2 - 2.5 + "px";
-      bullet.style.bottom = "50px";
-      gameContainer.appendChild(bullet);
 
-      const bulletMoveInterval = setInterval(() => {
-        const bulletBottom = parseInt(bullet.style.bottom) || 0;
-        bullet.style.bottom = bulletBottom + 10 + "px";
-
-        if (bulletBottom >= gameContainer.clientHeight) {
-          gameContainer.removeChild(bullet);
-          isShooting = false;
-          clearInterval(bulletMoveInterval);
-        }
-      }, 1000 / 60);
-    }
-  }
 
 document.addEventListener("keydown", (event) => {
-  if (event.key === "ArrowLeft") {
+  if (event.key === "ArrowLeft" && playerX > -60) {
     playerX -= 10;
-  } else if (event.key === "ArrowRight") {
+  } else if (event.key === "ArrowRight" && playerX + playerPosition < gameContainerWidth) {
     playerX += 10;
+  } else if (event.key === "ArrowUp"){
+    playerZ += 10;
+  } else if (event.key === "ArrowDown"){
+    playerZ -= 10;
   }
-  player.style.left = playerX + "px";
+
+//   player.style.left = playerX + "px";
 });
