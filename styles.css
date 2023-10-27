@@ -18,3 +18,15 @@ body {
     height: 70px;
     bottom: 0;
   }
+  #opponent {
+    position: absolute;
+    width: 100px;
+    height: 70px;
+    
+  }
+  .bullet {
+    position: absolute;
+    width: 5px;
+    height: 10px;
+    background-color: blue;
+  }
