@@ -5,12 +5,6 @@ const gameHeight = 600;
 const playerWidth = 150;
 const playerHeight = 150;
 
-const keyLeft = 37;
-const keyRight = 39;
-const keyUp = 38;
-const keyDown = 40;
-const keySpace = 32;
-
 const bulletFrequency = 50;
 
 const gameStatus = {
@@ -22,12 +16,24 @@ const gameStatus = {
   playerX: 0,
   playerY: 0,
   bulletFrequency: 0,
-  bullets: []
+  bullets: [],
+  enemies: [],
+  enemyBullets: []
 }
 
 function setPosition($el, x, y) {
   $el.style.transform = `translate(${x}px, ${y}px)`;
 }
+
+function intersect (r1, r2) {
+  return !(
+      r2.left > r1.right ||
+      r2.right < r1.left ||
+      r2.top > r1.bottom ||
+      r2.bottom < r1.top
+  );
+}
+
 
 function createPlayer(game) {
   gameStatus.playerX = gameWidth / 2 - playerWidth / 2;
@@ -37,6 +43,34 @@ function createPlayer(game) {
   player.className = "player";
   game.appendChild(player);
   setPosition(player, gameStatus.playerX, gameStatus.playerY);
+}
+
+function createOpponent(game) {
+  const minDistance = 50;
+  const x = Math.random() * (gameWidth - playerWidth);
+  const y = Math.random() * (gameHeight - playerHeight);
+  const isTooClose = gameStatus.enemies.some((enemy) => {
+    const distance = Math.sqrt((x - enemy.x) ** 2 + (y - enemy.y) ** 2);
+    return distance < minDistance;
+  });
+  if (!isTooClose && gameStatus.enemies.length < 10) {
+    const opponent = document.createElement("img");
+    opponent.src = "images/opponent.png";
+    opponent.className = "opponent";
+    game.appendChild(opponent);
+    const enemy = {
+      x,
+      y,
+      opponent
+    };
+    gameStatus.enemies.push(enemy);
+    setPosition(opponent, x, y);
+  }
+}
+
+
+function updateOpponent (game) {
+
 }
 
 function createBullet(game, x, y) {
@@ -96,6 +130,19 @@ function updateBullet(game) {
       eraseBullet(game, $bullet);
     }
     setPosition($bullet.bullet, $bullet.x, $bullet.y)
+    const r1 = $bullet.bullet.getBoundingClientRect();
+    const enemies = gameStatus.enemies;
+    for (let j = 0; j < enemies.length; j++) {
+      const enemy = enemies[j];
+      if (enemy.isRemoved) continue;
+      const r2 = enemy.opponent.getBoundingClientRect();
+      if (intersect(r1, r2)) {
+        eraseBullet(game, $bullet);
+        eraseOpponent(game, enemy);
+        createOpponent(game);
+        break;
+      }
+    }
   }
   gameStatus.bullets = gameStatus.bullets.filter(e => !e.isRemoved);
 }
@@ -104,54 +151,65 @@ function eraseBullet(game, $bullet) {
   game.removeChild($bullet.bullet);
   $bullet.isRemoved = true
 }
+
+function eraseOpponent(game, enemy) {
+  game.removeChild(enemy.opponent);
+  enemy.isRemoved = true
+
+}
+
 function update() {
-  // const game = document.querySelector(".game");
   updatePlayer(game)
   updateBullet(game)
-  // createBullet()
+  createOpponent(game)
+  // updateOpponent(game)
+
   window.requestAnimationFrame(update);
 }
 
 function onKeyDown(e) {
-  if (e.keyCode === keyLeft) {
+  // console.log(e);
+  if (e.keyCode === 37 || e.keyCode === 65) {
     gameStatus.leftPressed = true;
-  } else if (e.keyCode === keyRight) {
+  } else if (e.keyCode === 39 || e.keyCode === 68) {
     gameStatus.rightPressed = true;
-  } else if (e.keyCode === keyUp) {
+  } else if (e.keyCode === 38 || e.keyCode === 87) {
     gameStatus.upPressed = true;
-  } else if (e.keyCode === keyDown) {
+  } else if (e.keyCode === 40 || e.keyCode === 83) {
     gameStatus.downPressed = true;
-  } else if (e.keyCode === keySpace) {
+  } else if (e.keyCode === 32) {
     gameStatus.spacePressed = true;
   }
 }
 
 function onKeyUp(e) {
-  if (e.keyCode === keyLeft) {
+  if (e.keyCode === 37 || e.keyCode === 65) {
     gameStatus.leftPressed = false;
-  } else if (e.keyCode === keyRight) {
+  } else if (e.keyCode === 39 || e.keyCode === 68) {
     gameStatus.rightPressed = false;
-  } else if (e.keyCode === keyUp) {
+  } else if (e.keyCode === 38 || e.keyCode === 87) {
     gameStatus.upPressed = false;
-  } else if (e.keyCode === keyDown) {
+  } else if (e.keyCode === 40 || e.keyCode === 83) {
     gameStatus.downPressed = false;
-  } else if (e.keyCode === keySpace) {
+  } else if (e.keyCode === 32) {
     gameStatus.spacePressed = false;
   }
 }
 
-
-
-function init() {
+function sound() {
   let gameSound = new Audio("sound/gameMusic.mp3");
   gameSound.autoplay = true;
   gameSound.loop = true;
   document.getElementById("musicStop").onclick = function () { gameSound.pause(); };
   document.getElementById("musicPlay").onclick = function () { gameSound.play(); };
-  // document.addEventListener("keydown", function () {
-  //   gameSound.play();
-  // });
+}
+
+
+function init() {
+  sound()
   createPlayer(game)
+  // createOpponent(game)
+
 }
 
 
@@ -160,29 +218,3 @@ window.addEventListener("keydown", onKeyDown);
 window.addEventListener("keyup", onKeyUp);
 window.requestAnimationFrame(update);
 
-
-// let playerX = player.offsetWidth
-// let playerY = player.offsetHeight
-// console.log(playerX)
-// let playerZ = 100;
-// // let playerPosition = player.getAttribute("width");
-// // console.log(playerPosition);
-// // let gameContainerWidth = gameContainer.offsetWidth
-// // console.log(gameContainerWidth);
-// player.style.left = playerX + "px";
-// player.style.top = playerY + "px";
-
-
-// document.addEventListener("keydown", (event) => {
-//   if (event.key === "ArrowLeft" && playerX > -60) {
-//     playerX -= 10;
-//   } else if (event.key === "ArrowRight" && playerX + playerY < gameContainerWidth) {
-//     playerX += 10;
-//   } else if (event.key === "ArrowUp"){
-//     playerZ += 10;
-//   } else if (event.key === "ArrowDown"){
-//     playerZ -= 10;
-//   }
-//
-//   player.style.left = playerX + "px";
-// });
