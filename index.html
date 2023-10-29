@@ -1,17 +1,30 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>River Raid</title>
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
-    
-    <div class="game-container">  
-    <!-- <div class="header"><h2>Palestine Invaders</h2></div> -->
-        
-        <div class="opponent"><img id="opponent" src="opponent.png" alt="opponent" /></div>
-        <div class="player"><img id="player" src="aircraft.png" alt="player" /></div>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Space Game</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+  <div class="case">
+    <header>Palestine Invaders</header>
+    <div class="game-container">
+      <div class="game"></div>
     </div>
+
+    <footer>
+      <p id="align-items">Powered by L&M &#174</p>
+      <div>
+        <p>Sound</p>
+        <button id="musicStop">Stop</button>
+        <button id="musicPlay">Play</button>
+      </div>
+    </footer>
+  </div>
+
     <script src="app.js"> </script>
   </body>
 </html>
