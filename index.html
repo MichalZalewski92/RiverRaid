@@ -1,14 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>River Raid</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="styles.css">
-  </head>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Space Game</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+
   <body>
-    
-    <div class="grid"></div>
+    <div class="case">
+      <header>Space Game</header>
+      <div class="game-duration">Game Time: 00:00:00</div>
+      <div class="result">Score: 0 points</div>
+      <div class="game-container">
+        <div class="grid"></div>
+      </div>
+
+      <footer>
+        <p id="align-items">Developed by L&M &#174</p>
+        <div>
+          <p>Sound</p>
+          <button id="musicStop">Stop</button>
+          <button id="musicPlay">Play</button>
+        </div>
+      </footer>
+    </div>
+
     <script src="app.js"> </script>
-    <h3 class="result">0</h3>
   </body>
 </html> 

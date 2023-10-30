@@ -6,6 +6,9 @@ let direction = 1
 let invadersID
 let goingRight = true
 let aliensRemoved = []
+let results = 0
+let startTime = null
+let gameDuration = 0;
 
 
 for (let i = 0; i < 450; i++) {
@@ -22,7 +25,7 @@ const alienInvaders = [
 ]
 
 function draw(){
-    for (let i =0 ; i < alienInvaders.length; i ++){
+    for (let i = 0 ; i < alienInvaders.length; i ++){
         if (!aliensRemoved.includes(i)){
             squares[alienInvaders[i]].classList.add('invader')
         }      
@@ -38,6 +41,7 @@ function removeInvaders(){
 }
 
 squares[currentShooterIndex].classList.add('shooter')
+startGame()
 
 function moveShooter(e){
     squares[currentShooterIndex].classList.remove('shooter')
@@ -53,6 +57,7 @@ squares[currentShooterIndex].classList.add('shooter')
 
 }
 document.addEventListener('keydown', moveShooter)
+
 
 function moveInvaders(){
     const leftEdge = alienInvaders[0] % width === 0
@@ -74,26 +79,28 @@ function moveInvaders(){
             direction = 1
             goingRight = true
         }
-
     }
     for ( let i = 0; i < alienInvaders.length; i ++){
         alienInvaders[i] += direction
     }
    draw()
 
-   if (squares[currentShooterIndex].classList.contains('invader','shooter')){
+   if (squares[currentShooterIndex].classList.contains('invader', 'shooter')){
+       endGame()
     alert('Game Over')
     clearInterval(invadersID)
    }
    for (let i =0 ; i < alienInvaders.length; i ++){
     if(alienInvaders[i] > squares.length ){
+        endGame()
         alert("GAME OVER")
         clearInterval(invadersID)
     }
    }
 
    if (aliensRemoved.length === alienInvaders.length){
-    alert("You win")
+       endGame()
+    alert(`You win! You scored ${results} points in ${gameDuration} seconds`)
     clearInterval(invadersID)
    }
 
@@ -118,12 +125,17 @@ function shoot(e){
 
             const alienRemoval = alienInvaders.indexOf(currentLaserIndex)
             aliensRemoved.push(alienRemoval)
+            results++
+            document.querySelector('.result').innerHTML = `Score: ${results} points`;
             
 
         }
-        }
+    }
+
     switch(e.key){
-        case 's':
+        case ' ':
+            const audio = new Audio("sound/bulletSound.mp3");
+            audio.play();
         laserID = setInterval(moveLaser,100)
         break
 
@@ -131,3 +143,40 @@ function shoot(e){
 }
 
 document.addEventListener('keydown', shoot)
+
+
+function updateGameDuration() {
+    if (startTime !== null) {
+        const currentTime = new Date().getTime();
+        gameDuration = Math.floor((currentTime - startTime) / 1000);
+        const hours = Math.floor(gameDuration / 3600);
+        const minutes = Math.floor((gameDuration % 3600) / 60);
+        const seconds = gameDuration % 60;
+        const formattedTime = `${String(hours).padStart(2, '0')}:
+                                        ${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        document.querySelector('.game-duration').innerHTML = `Game Time: ${formattedTime}`;
+    }
+}
+
+function startGame() {
+    startTime = new Date().getTime();
+    sound()
+}
+
+function endGame() {
+    if (startTime !== null) {
+        clearInterval(timerInterval);
+    }
+}
+
+function sound() {
+    let gameSound = new Audio("sound/gameMusic.mp3");
+    gameSound.autoplay = true;
+    gameSound.loop = true;
+    document.getElementById("musicStop").onclick = function () { gameSound.pause(); };
+    document.getElementById("musicPlay").onclick = function () { gameSound.play(); };
+}
+
+const timerInterval = setInterval(updateGameDuration, 1000);
+
+
