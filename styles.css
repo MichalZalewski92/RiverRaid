@@ -1,11 +1,4 @@
-/* body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #f7f3f3;
-  } */
+
   .grid {
     /* position: absolute; */
     margin-left: 320px;
@@ -57,44 +50,3 @@
   .boom{
     background-color: rgb(253, 45, 45);
   }
-  /* .player {
-    position: absolute; 
-    height: 100px;
-    width: 150px;
-    top: 50px;
-    
-  }
-  .opponent {
-    position: absolute; 
-    height: 100px;
-    width: 100px;
-    top: 10px;
-    
-  }
-  #player{
-    position: absolute;
-    top: 400px;
-    width: 100px;
-    height: 100px;
-  }
-  #opponent {
-    position: absolute;
-    width: 100px;
-    height: 70px;
-    
-  }
-  .bullet {
-    position: absolute;
-    width: 5px;
-    height: 10px;
-    background-color: blue;
-  }
-  h2{
-    margin-left: 40%;
-    font-size: medium;
-    color: rgb(17, 17, 17);
-  }
-  .header{
-    background-color: #f7f3f3;
-    
-  } */

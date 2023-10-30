@@ -7,7 +7,6 @@ let invadersID
 let goingRight = true
 let aliensRemoved = []
 
-console.log(grid)
 
 for (let i = 0; i < 450; i++) {
     const square = document.createElement('div')
