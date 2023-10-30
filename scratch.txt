@@ -19,3 +19,71 @@
 //       }, 1000 / 60);
 //     }
 //   }
+
+// const player = document.querySelector(".player");
+// const opponent = document.querySelector(".opponent");
+// const gameContainer = document.querySelector(".game-container");
+// console.log(gameContainer)
+// console.log(player)
+// console.log(opponent)
+
+
+// let playerX = player.offsetWidth
+// let playerY = player.offsetHeight
+// console.log(playerX)
+// let playerZ = 100;
+// // let playerPosition = player.getAttribute("width");
+// // console.log(playerPosition);
+// let gameContainerWidth = gameContainer.offsetWidth
+// console.log(gameContainerWidth);
+// player.style.left = playerX + "px";
+// player.style.top = playerY + "px";
+
+
+
+
+
+// document.addEventListener("keydown", (event) => {
+//   if (event.key === "ArrowLeft" && playerX > -60) {
+//     playerX -= 10;
+//   } else if (event.key === "ArrowRight" && playerX + playerY < gameContainerWidth) {
+//     playerX += 10;
+//   } else if (event.key === "ArrowUp"){
+//     playerZ += 10;
+//   } else if (event.key === "ArrowDown"){
+//     playerZ -= 10;
+//   }
+
+//   player.style.left = playerX + "px";
+// });
+
+
+//    for (let i =0 ; i < alienInvaders.length; i ++){
+//     if(alienInvaders[i] > squares.length ){
+//         displayResult.innerHTML = "GAME OVER"
+//         clearInterval(invadersID)
+//     }
+//    }
+
+   
+
+}
+invadersID = setInterval(moveInvaders, 100)
+
+// function shoot(e){
+//     let laserID
+//     let currentLaserIndex = currentShooterIndex
+//     function moveLaser(){
+//         squares[currentLaserIndex].classList.remove('laser')
+//         currentLaserIndex -= width
+//         squares[currentLaserIndex].classList.add('laser')
+//         }
+//     switch(e.key){
+//         case ' ':
+//         laserID = setInterval(moveLaser,100)
+//         break
+
+//     }
+// }
+
+// document.addEventListener('keydown', shoot)

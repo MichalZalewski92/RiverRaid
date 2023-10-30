@@ -1,17 +1,23 @@
-body {
+/* body {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
     background-color: #f7f3f3;
-  }
-  .game-container {
-    position: relative;
-    width: 480px;
+  } */
+  .grid {
+    /* position: absolute; */
+    margin-left: 320px;
+    margin-top: 5px;
+    width: 600px;
     height: 600px;
     background: url(background.png);
     animation: scroll-background 5s linear infinite;
+    display: flex;
+    flex-wrap: wrap;
+
+    
     
   }
 
@@ -23,7 +29,35 @@ body {
         background-position: 0px 600px ;
     }
   }
-  .player {
+  
+  .grid div{
+    width: 40px;
+    height: 40px;
+  }
+
+  .invader{
+    background:url(opponent.png);
+    background-size: cover;
+    border: 10px;
+  }
+
+  .shooter{
+    background: url(aircraft.png);
+    background-size: 100% auto;
+    border: 10px;
+  }
+  
+  .laser{
+    background: url(beam.png);
+    background-size: cover;
+    border: 10px;
+   
+  }
+
+  .boom{
+    background-color: rgb(253, 45, 45);
+  }
+  /* .player {
     position: absolute; 
     height: 100px;
     width: 150px;
@@ -63,4 +97,4 @@ body {
   .header{
     background-color: #f7f3f3;
     
-  }
+  } */
